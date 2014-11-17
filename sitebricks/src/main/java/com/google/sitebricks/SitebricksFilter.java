@@ -1,5 +1,6 @@
 package com.google.sitebricks;
 
+import com.google.sitebricks.error.ErrorHandler;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -35,16 +36,18 @@ class SitebricksFilter implements Filter {
 
   private final Provider<Request<String>> requestProvider;
   private final ReplyBasedHeadlessRenderer headlessRenderer;
+  private final ErrorHandler errorHandler;
 
   @Inject
   public SitebricksFilter(RoutingDispatcher dispatcher, Provider<Bootstrapper> bootstrapper,
-                          Provider<Shutdowner> teardowner, Provider<Request<String>> requestProvider,
-                          ReplyBasedHeadlessRenderer headlessRenderer) {
+						  Provider<Shutdowner> teardowner, Provider<Request<String>> requestProvider,
+						  ReplyBasedHeadlessRenderer headlessRenderer, ErrorHandler errorHandler) {
     this.dispatcher = dispatcher;
     this.bootstrapper = bootstrapper;
     this.teardowner = teardowner;
     this.requestProvider = requestProvider;
     this.headlessRenderer = headlessRenderer;
+    this.errorHandler = errorHandler;
   }
 
   public void init(FilterConfig filterConfig) throws ServletException {
@@ -59,7 +62,12 @@ class SitebricksFilter implements Filter {
     HttpServletResponse response = (HttpServletResponse) servletResponse;
 
     //dispatch
-    Object respondObject = dispatcher.dispatch(this.requestProvider.get(), Events.DURING);
+	  Object respondObject = null;
+	  try {
+    	respondObject = dispatcher.dispatch(this.requestProvider.get(), Events.DURING);
+	  } catch(Exception ex) {
+		errorHandler.handleException(ex);
+	  }
 
     //was there any matching page? (if it was a headless response, we don't need to do anything).
     // Also we do not do anything if the page elected to do nothing.
@@ -68,7 +76,7 @@ class SitebricksFilter implements Filter {
       // Only use the string rendering pipeline if this is not a headless request.
       if (respondObject instanceof Respond) {
         Respond respond = (Respond) respondObject;
-      
+
         //do we need to redirect or was this a successful render?
         final String redirect = respond.getRedirect();
         if (null != redirect) {

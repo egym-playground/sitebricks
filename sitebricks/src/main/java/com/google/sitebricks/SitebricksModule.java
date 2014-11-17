@@ -1,5 +1,6 @@
 package com.google.sitebricks;
 
+import com.google.sitebricks.error.ErrorHandlerModule;
 import java.lang.annotation.Annotation;
 import java.util.Enumeration;
 import java.util.List;
@@ -120,11 +121,21 @@ public class SitebricksModule extends AbstractModule implements PageBinder {
 
     configureTemplateSystem();
 
+    /* Now bind the error handler.*/
+    bingErrorHandler();
   }
+
+    /**
+     * Used to bind the error handler. Can be overwritten if custom Locale behavior is desired. Overwriting methods should provide a binding
+     * for {@link com.google.sitebricks.error.ErrorHandler}.
+     */
+    protected void bingErrorHandler() {
+	  install(new ErrorHandlerModule());
+	}
 
   protected void configureTemplateSystem() {
     //
-    // Map of all the implementations keyed by type they can handle 
+    // Map of all the implementations keyed by type they can handle
     //
     ImmutableMap.Builder<String, Class<? extends TemplateCompiler>> builder = ImmutableMap.builder();
 
@@ -232,7 +243,7 @@ public class SitebricksModule extends AbstractModule implements PageBinder {
       public void usingDefault() {
         add(Localizer.defaultLocalizationFor(iface));
       }
-      
+
     };
 
   }
@@ -246,7 +257,7 @@ public class SitebricksModule extends AbstractModule implements PageBinder {
       }
       localeLocalizer.put(localization.getLocale(), localization);
   }
-  
+
   protected final void scan(Package pack) {
     Preconditions.checkArgument(null != pack, "Package parameter to scan() cannot be null");
     packages.add(pack);
