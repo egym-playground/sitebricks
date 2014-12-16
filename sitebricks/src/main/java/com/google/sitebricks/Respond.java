@@ -6,7 +6,7 @@ import java.util.List;
  * @author Dhanji R. Prasanna (dhanji@gmail.com)
  */
 public interface Respond {
-  Respond HEADLESS = new StringBuilderRespond(new Object());
+  Respond HEADLESS = new StringBufferRespond(new Object());
 
   void write(String text);
 

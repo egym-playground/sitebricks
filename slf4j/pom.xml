@@ -3,8 +3,8 @@
   <parent>
     <groupId>com.google.sitebricks</groupId>
     <artifactId>sitebricks-parent</artifactId>
-    <version>0.8.10-SNAPSHOT</version>
-  </parent>  
+    <version>0.8.10.egym.3</version>
+  </parent>
   <artifactId>sitebricks-slf4j</artifactId>
   <name>Sitebricks :: SLF4J Module</name>
   <description>Slf4j logging support for Guice applications (does not require sitebricks)</description>
@@ -53,6 +53,6 @@
       <name>Nexus OSS Staging Repository</name>
       <url> https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
-  </distributionManagement> 
-  
+  </distributionManagement>
+
 </project>

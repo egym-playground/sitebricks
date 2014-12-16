@@ -2,7 +2,7 @@ package com.google.sitebricks.rendering.control;
 
 import com.google.sitebricks.Renderable;
 import com.google.sitebricks.Respond;
-import com.google.sitebricks.StringBuilderRespond;
+import com.google.sitebricks.StringBufferRespond;
 import com.google.sitebricks.compiler.ExpressionCompileException;
 import com.google.sitebricks.rendering.SelfRendering;
 import net.jcip.annotations.Immutable;
@@ -22,8 +22,8 @@ class RequireWidget implements Renderable {
     this.widget = child;
   }
 
-  public void render(Object bound, Respond respond) {
-    StringBuilderRespond inner = new StringBuilderRespond(bound);
+  public synchronized void render(Object bound, Respond respond) {
+    StringBufferRespond inner = new StringBufferRespond(bound);
     widget.render(bound, inner);
 
     //special method interns tokens

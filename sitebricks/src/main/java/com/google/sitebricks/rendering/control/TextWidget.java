@@ -25,7 +25,7 @@ class TextWidget implements Renderable {
         tokenizedTemplate = compiler.tokenizeAndCompile(template);
     }
 
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
 
         //render template from tokens
         StringBuilder builder = new StringBuilder();

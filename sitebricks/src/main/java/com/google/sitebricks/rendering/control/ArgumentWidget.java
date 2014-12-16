@@ -26,7 +26,7 @@ class ArgumentWidget implements Renderable {
         this.evaluator = evaluator;
     }
 
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
         widgetChain.render(bound, respond);
     }
 

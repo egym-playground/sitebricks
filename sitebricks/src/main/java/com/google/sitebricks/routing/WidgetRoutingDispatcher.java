@@ -15,7 +15,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.sitebricks.Respond;
-import com.google.sitebricks.StringBuilderRespond;
+import com.google.sitebricks.StringBufferRespond;
 import com.google.sitebricks.binding.FlashCache;
 import com.google.sitebricks.binding.RequestBinder;
 import com.google.sitebricks.client.transport.Json;
@@ -40,7 +40,7 @@ class WidgetRoutingDispatcher implements RoutingDispatcher {
 
   @Inject
   Provider<HttpServletRequest> httpServletRequestProvider;
-  
+
   @Inject
   private ValidationConverter validationConvertor;
 
@@ -95,7 +95,7 @@ class WidgetRoutingDispatcher implements RoutingDispatcher {
   private Object bindAndReply(Request request, Page page, Object instance) throws IOException {
     // bind request (sets request params, etc).
     binder.bind(request, instance);
-    
+
     Object response = null;
     try {
         // call the appropriate handler.
@@ -127,9 +127,9 @@ class WidgetRoutingDispatcher implements RoutingDispatcher {
         Set<? extends ConstraintViolation<?>> scv = (Set<? extends ConstraintViolation<?>>) cve.getConstraintViolations();
         errors = validationConvertor.to(scv);
     }
-        
+
     //render to respond
-    Respond respond = new StringBuilderRespond(instance);
+    Respond respond = new StringBufferRespond(instance);
     respond.setErrors(errors);
     if (null != redirect) {
 
@@ -157,7 +157,7 @@ class WidgetRoutingDispatcher implements RoutingDispatcher {
     } else {
       page.widget().render(instance, respond);
     }
-    
+
     return respond;
   }
 
@@ -174,5 +174,5 @@ class WidgetRoutingDispatcher implements RoutingDispatcher {
   private static String contextualize(Request request, String targetUri) {
     return request.context() + targetUri;
   }
-  
+
 }

@@ -8,6 +8,6 @@ public class RespondersForTesting {
   }
 
   public static Respond newRespond() {
-    return new StringBuilderRespond(new Object());
+    return new StringBufferRespond(new Object());
   }
 }

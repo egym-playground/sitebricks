@@ -29,7 +29,7 @@ class RepeatWidget implements Renderable {
 
     private static final String DEFAULT_PAGEVAR = "__page";
     private static final String DEFAULT_VAR = "__this";
-    
+
     public RepeatWidget(WidgetChain widgetChain, String expression, Evaluator evaluator) {
         this.widgetChain = widgetChain;
 
@@ -52,23 +52,23 @@ class RepeatWidget implements Renderable {
         this.pageVar = pageVar;
         this.evaluator = evaluator;
     }
-    
+
     @Inject
     public void setConverter(TypeConverter converter)
 	{
 		this.converter = converter;
 	}
 
-    public void render(Object bound, Respond respond) {
-        
+    public synchronized void render(Object bound, Respond respond) {
+
     	Object value = evaluator.evaluate(items, bound);
-    	
+
     	//do nothing if the collection is unavailable for some reason
     	if (null == value)
     		return;
 
     	Collection<?> items = converter.convert(value, Collection.class);
-        
+
         Map<String, Object> context = new HashMap<String, Object>();
 
         //set up context variables

@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.google.sitebricks</groupId>
     <artifactId>sitebricks-parent</artifactId>
-    <version>0.8.10-SNAPSHOT</version>
+    <version>0.8.10.egym.3</version>
   </parent>
   <artifactId>sitebricks-channel</artifactId>
   <name>Sitebricks :: Channel</name>
@@ -35,7 +35,7 @@
       <dependency>
         <groupId>org.eclipse.jetty.websocket</groupId>
         <artifactId>websocket-servlet</artifactId>
-      </dependency>    
+      </dependency>
       <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-continuation</artifactId>

@@ -68,7 +68,7 @@ class XmlWidget implements Renderable {
     return map;
   }
 
-  public void render(Object bound, Respond respond) {
+  public synchronized void render(Object bound, Respond respond) {
     writeOpenTag(bound, respond, name, attributes);
 
     //write children

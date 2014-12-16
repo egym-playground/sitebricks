@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.sitebricks.Evaluator;
 import com.google.sitebricks.Renderable;
 import com.google.sitebricks.Respond;
-import com.google.sitebricks.StringBuilderRespond;
+import com.google.sitebricks.StringBufferRespond;
 import com.google.sitebricks.rendering.Decorated;
 import com.google.sitebricks.routing.PageBook;
 
@@ -30,7 +30,7 @@ public class DecorateWidget implements Renderable {
   }
 
   @Override
-  public void render(Object bound, Respond respond) {
+  public synchronized void render(Object bound, Respond respond) {
 
     Class<?> templateClass;
     Class<?> previousTemplateClass = templateClassLocal.get();
@@ -52,7 +52,7 @@ public class DecorateWidget implements Renderable {
       PageBook.Page page = book.forName(DecorateWidget.embedNameFor(templateClass));
 
       // create a dummy respond to collect the output of the embedded page
-      StringBuilderRespond sbrespond = new StringBuilderRespond(bound);
+      StringBufferRespond sbrespond = new StringBufferRespond(bound);
       EmbeddedRespond embedded = new EmbeddedRespond(null, sbrespond);
       page.widget().render(bound, embedded);
 

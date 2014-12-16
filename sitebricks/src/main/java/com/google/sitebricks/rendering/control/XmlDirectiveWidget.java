@@ -25,7 +25,7 @@ class XmlDirectiveWidget implements Renderable {
     this.tokens = Parsing.tokenize(template, compiler);
   }
 
-  public void render(Object bound, Respond respond) {
+  public synchronized void render(Object bound, Respond respond) {
     respond.write("<!");
     for (Token token : tokens) {
       respond.write(token.render(bound).toString());

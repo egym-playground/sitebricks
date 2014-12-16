@@ -6,7 +6,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.Stage;
 import com.google.sitebricks.Renderable;
-import com.google.sitebricks.StringBuilderRespond;
+import com.google.sitebricks.StringBufferRespond;
 import com.google.sitebricks.compiler.Compilers;
 
 import java.util.Set;
@@ -50,7 +50,7 @@ public class Templates {
     }
     Preconditions.checkArgument(null != compiled, "No template found attached to: %s", clazz);
 
-    StringBuilderRespond respond = new StringBuilderRespond(context);
+    StringBufferRespond respond = new StringBufferRespond(context);
     //noinspection ConstantConditions
     compiled.render(context, respond);
 

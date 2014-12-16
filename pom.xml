@@ -9,7 +9,7 @@
   <groupId>com.google.sitebricks</groupId>
   <artifactId>sitebricks-parent</artifactId>
   <packaging>pom</packaging>
-  <version>0.8.10-SNAPSHOT</version>
+  <version>0.8.10.egym.3</version>
   <name>Sitebricks :: Parent</name>
   <url>https://github.com/dhanji/sitebricks</url>
 
@@ -174,7 +174,7 @@
         <artifactId>freemarker</artifactId>
         <version>2.3.10</version>
       </dependency>
-      
+
       <dependency>
         <groupId>com.ning</groupId>
         <artifactId>async-http-client</artifactId>
@@ -336,7 +336,7 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.8.2</version>
-      </dependency>      
+      </dependency>
     </dependencies>
   </dependencyManagement>
 

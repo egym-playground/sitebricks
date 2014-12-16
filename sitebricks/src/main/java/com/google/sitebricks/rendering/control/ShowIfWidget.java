@@ -24,7 +24,7 @@ class ShowIfWidget implements Renderable {
         this.evaluator = evaluator;
     }
 
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
         //messy =(
         final Object o = evaluator.evaluate(expression, bound);
 

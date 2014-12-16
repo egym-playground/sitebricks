@@ -29,7 +29,7 @@ public class ErrorsWidget implements Renderable {
     }
 
     @Override
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
         if (!respond.getErrors().isEmpty()) {
             Localizer.Localization localization = null;
             ResourceBundle resourceBundle = bound.getClass().getAnnotation(ResourceBundle.class);

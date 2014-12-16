@@ -19,7 +19,7 @@ class IncludeWidget implements Renderable {
         this.evaluator = evaluator;
     }
 
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
         respond.include((String) evaluator.evaluate(name, bound))
                 .render(bound, respond);
     }

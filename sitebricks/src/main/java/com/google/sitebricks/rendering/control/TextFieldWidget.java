@@ -25,7 +25,7 @@ class TextFieldWidget implements Renderable {
         this.evaluator = evaluator;
     }
 
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
         respond.withHtml()
                 .textField(expression, (String) evaluator.evaluate(expression, bound));
     }

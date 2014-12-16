@@ -59,7 +59,7 @@ class DebugModeRoutingDispatcher implements RoutingDispatcher {
     } catch (TemplateCompileException tce) {
       // NOTE(dhanji): Don't log error metrics here, they are better handled by the compiler.
 
-      final Respond respond = new StringBuilderRespond(new Object());
+      final Respond respond = new StringBufferRespond(new Object());
 
       respond.write("<h3>");
       respond.write("Compile errors in page");
@@ -75,7 +75,7 @@ class DebugModeRoutingDispatcher implements RoutingDispatcher {
 
 
     } catch (PropertyAccessException pae) {
-      final Respond respond = new StringBuilderRespond(new Object());
+      final Respond respond = new StringBufferRespond(new Object());
 
       Throwable cause = pae.getCause();
 

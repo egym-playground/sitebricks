@@ -42,7 +42,7 @@ class EmbedWidget implements Renderable {
   }
 
 
-  public void render(Object bound, Respond respond) {
+  public synchronized void render(Object bound, Respond respond) {
     PageBook.Page page = pageBook.forName(targetPage);
 
     //create an instance of the embedded page

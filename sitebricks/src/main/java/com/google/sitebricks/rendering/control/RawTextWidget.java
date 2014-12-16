@@ -18,7 +18,7 @@ public class RawTextWidget implements Renderable {
     this.template = template;
   }
 
-  public void render(Object bound, Respond respond) {
+  public synchronized void render(Object bound, Respond respond) {
     respond.write(template);
   }
 

@@ -33,7 +33,7 @@ class ChooseWidget implements Renderable {
         //TODO validate expression
     }
 
-    public void render(Object bound, Respond respond) {
+    public synchronized void render(Object bound, Respond respond) {
         final String from = map.get("from");
 
         Object o = evaluator.read(from, bound);
